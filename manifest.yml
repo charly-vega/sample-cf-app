@@ -1,0 +1,10 @@
+applications:
+- name: hello_app_cvega
+  instances: 1
+  memory: 1024M
+  disk_quota: 1024M
+  routes:
+  - route: hello-app-cvega.mybluemix.net
+  buildpack: https://github.com/cloudfoundry/ruby-buildpack.git
+  command: rails server -p $PORT
+  stack: cflinuxfs2
