@@ -81,4 +81,4 @@ test:
 #
 production:
   <<: *default
-  url: <%= JSON.parse(ENV["VCAP_SERVICES"])["compose-for-postgresql"][0]["credentials"]["uri"] %>
+  url: <%= ENV['DATABASE_URL'] || '' %>

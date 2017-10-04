@@ -5,6 +5,9 @@ applications:
   disk_quota: 1024M
   routes:
   - route: hello-app-cvega.mybluemix.net
-  buildpack: https://github.com/cloudfoundry/ruby-buildpack.git
+  buildpack: "https://github.com/cloudfoundry/ruby-buildpack.git#v1.7.3"
   command: rails server -p $PORT
+  services:
+  - availability-monitoring-auto
+  - hello_app_cvega-db
   stack: cflinuxfs2
