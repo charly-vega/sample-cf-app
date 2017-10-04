@@ -1,13 +1,21 @@
+---
+stack: cflinuxfs2
+buildpack: "https://github.com/cloudfoundry/ruby-buildpack.git#v1.7.3"
+services:
+- hello_app_cvega-redis
+- hello_app_cvega-db
 applications:
-- name: hello_app_cvega
+- name: hello_app_cvega-app
   instances: 1
-  memory: 1024M
-  disk_quota: 1024M
+  memory: 512M
+  disk_quota: 512M
   routes:
   - route: hello-app-cvega.mybluemix.net
-  buildpack: "https://github.com/cloudfoundry/ruby-buildpack.git#v1.7.3"
   command: rails server -p $PORT
   services:
   - availability-monitoring-auto
-  - hello_app_cvega-db
-  stack: cflinuxfs2
+- name: hello_app_cvega-worker
+  instances: 1
+  memory: 512M
+  disk_quota: 512M
+  command: sidekiq

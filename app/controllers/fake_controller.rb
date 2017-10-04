@@ -1,5 +1,10 @@
 class FakeController < ApplicationController
   def work
+    if params[:async] == 'true'
+      DoIntensiveStuffWorker.perform_async
+      return render plain: 'Enqueued'
+    end
+    
     cpu_ms         = (params['cpu_ms'] || 50).to_i
     iowait_ms      = (params['iowait_ms'] || 250).to_i
     response_chars = (params['response_chars'] || 20_000).to_i
